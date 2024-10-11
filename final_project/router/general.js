@@ -147,7 +147,7 @@ public_users.get('/isbn/:isbn', (req, res) => {
                 res.json(reauthor);
             })
             .catch((err) => {
-                res.status(400).json({ error: "Author not found" });
+                res.status(400).json({ error: "Book not found" });
             });
     });
 
@@ -184,7 +184,7 @@ public_users.get('/isbn/:isbn', (req, res) => {
             res.json(retitle);
         })
         .catch((err) => {
-            res.status(400).json({ error: "Title not found" });
+            res.status(400).json({ error: "Book not found" });
         });
 });
 
