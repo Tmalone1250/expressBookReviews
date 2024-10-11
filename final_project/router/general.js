@@ -94,10 +94,11 @@ public_users.get('/', (req, res) => {
 // Get book details based on ISBN using Promises
 public_users.get('/isbn/:isbn', (req, res) => {
     const ISBN = req.params.isbn;
+    console.log(books [ISBN],ISBN);
     const booksBasedOnIsbn = (ISBN) => {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                const book = books.find((b) => b.isbn === ISBN); // Ensure you're using the right key here
+                const book = books [ISBN];
                 if (book) {
                     resolve(book);
                 } else {
@@ -127,25 +128,26 @@ public_users.get('/isbn/:isbn', (req, res) => {
     //await res.send(JSON.stringify(new_books))
     public_users.get('/author/:author', (req, res) => {
         const author = req.params.author;
-        const booksBasedOnAuthor = (auth) => {
+        console.log(books [author],author);
+        const booksBasedOnAuthor = (author) => {
             return new Promise((resolve, reject) => {
                 setTimeout(() => {
-                    const filteredbooks = books.filter((b) => b.author === auth);
-                    if (filteredbooks.length > 0) {  // Use .length to check array length
-                        resolve(filteredbooks);
+                    const reauthor = books [author];
+                    if (author) {
+                        resolve(author);
                     } else {
-                        reject(new Error("Book not found"));
+                        reject(new Error("Author not found"));
                     }
                 }, 1000);
             });
         };
     
         booksBasedOnAuthor(author)
-            .then((book) => {
-                res.json(book);
+            .then((reauthor) => {
+                res.json(reauthor);
             })
             .catch((err) => {
-                res.status(400).json({ error: "Book not found" });
+                res.status(400).json({ error: "Author not found" });
             });
     });
 
@@ -163,25 +165,26 @@ public_users.get('/isbn/:isbn', (req, res) => {
 
   public_users.get('/title/:title', (req, res) => {
     const title = req.params.title;
-    const booksBasedOnTitle = (booktitle) => {
+    console.log(books [title],title);
+    const booksBasedOnAuthor = (title) => {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                const filteredbooks = books.filter((b) => b.title === booktitle);
-                if (filteredbooks.length > 0) {  // Use .length to check array length
-                    resolve(filteredbooks);
+                const retitle = books [title];
+                if (title) {
+                    resolve(title);
                 } else {
-                    reject(new Error("Book not found"));
+                    reject(new Error("Title not found"));
                 }
             }, 1000);
         });
     };
 
-    booksBasedOnTitle(title)
-        .then((new_books) => {
-            res.json(new_books);
+    booksBasedOnAuthor(title)
+        .then((retitle) => {
+            res.json(retitle);
         })
         .catch((err) => {
-            res.status(400).json({ error: "Book not found" });
+            res.status(400).json({ error: "Title not found" });
         });
 });
 
